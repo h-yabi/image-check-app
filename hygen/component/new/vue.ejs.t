@@ -1,5 +1,5 @@
 ---
-to: components/<%= category %>/<%= name %>.vue
+to: components/<%= category %><% if(subcategory && subcategory!=='サブカテゴリなし'){ %>/<%= subcategory %><% } %>/<%= componentname || 'unnamed'%>/<%= componentname || 'unnamed'%>.vue
 ---
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
@@ -25,7 +25,7 @@ const computedSample = computed(() => refSample.value + 1);
 </script>
 
 <template>
-  <div class="<%= h.changeCase.param(name) %>">
+  <div class="<%= h.changeCase.param(componentname) %>">
     {{ refSample }}
     {{ reactiveSample }}
     {{ computedSample }}
@@ -33,5 +33,5 @@ const computedSample = computed(() => refSample.value + 1);
 </template>
 
 <style lang="scss" scoped>
-// .<%= h.changeCase.param(name) %>
+// .<%= h.changeCase.param(componentname) %>
 </style>
