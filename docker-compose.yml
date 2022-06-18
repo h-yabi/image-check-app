@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  front:
+    container_name: nuxt
+    build: .
+    tty: true
+    # command: /bin/sh -c "yarn install && yarn dev"
+    volumes:
+      - .:/code
+    ports:
+      - '3000:3000'
+      - '24678:24678'
+  storybook:
+    container_name: storybook
+    build: .
+    tty: true
+    volumes:
+      - .:/code
+    ports:
+      - '3001:3001'
+      - '24679:24679'
