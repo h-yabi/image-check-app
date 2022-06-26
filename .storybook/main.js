@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   "stories": [
     "../components/**/*.stories.@(js|jsx|ts|tsx)",
@@ -8,6 +10,13 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions"
   ],
+  "webpackFinal": async (config) => {
+    config.resolve.alias = {
+      ...config.resolve?.alias,
+      '@': path.resolve(__dirname, '../'),
+    };
+    return config;
+  },
   "framework": "@storybook/vue3",
   "core": {
     "builder": "@storybook/builder-webpack5"
