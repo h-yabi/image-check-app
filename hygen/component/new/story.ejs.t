@@ -5,7 +5,7 @@ import <%= componentname %> from './<%= componentname %>'
 
 export default {
   component: <%= componentname %>,
-  title: '<%= componentname %>',
+  title: '<%= category %>/<%= subcategory %>/<%= componentname %>',
 }
 
 export const Default = () => ({
