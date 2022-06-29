@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import IconPlus from '@/components/atoms/icons/IconPlus/IconPlus.vue';
-import FileUpload from '@/components/atoms/texts/FileUpload/FileUpload.vue';
+import TextBase from '@/components/atoms/texts/TextBase/TextBase.vue';
 </script>
 
 <template>
   <div class="upload">
     <IconPlus />
-    <FileUpload />
+    <TextBase :size="14">textが入る</TextBase>
   </div>
 </template>
 
