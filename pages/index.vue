@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const title = 'Hello Nuxt3!!';
+import Upload from '@/components/molecules/Upload/Upload.vue';
 
-useMeta({
-  meta: [{ name: 'description', content: `This is ${title} page` }],
+const title = 'Image Checker';
+
+useHead({
+  meta: [{ name: 'description', content: `This is ${title}` }],
   title,
 });
 </script>
@@ -10,5 +12,6 @@ useMeta({
 <template>
   <div>
     <h1>{{ title }}</h1>
+    <Upload />
   </div>
 </template>

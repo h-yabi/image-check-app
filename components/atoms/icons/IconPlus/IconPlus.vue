@@ -62,4 +62,12 @@
 
 <style lang="scss" scoped>
 // .icon-plus
+.icon-plus {
+  margin-right: 5px;
+  line-height: 1;
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
 </style>
