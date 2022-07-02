@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Upload from '@/components/molecules/Upload/Upload.vue';
 
-const title = 'Image Checker';
+const title = '画像サイズチェッカー';
 
 useHead({
   meta: [{ name: 'description', content: `This is ${title}` }],

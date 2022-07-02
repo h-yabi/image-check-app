@@ -9,4 +9,3 @@ export const Default = () => ({
   components: { IconPlus },
   template: '<IconPlus />',
 })
-Default.storyName = 'デフォルト'

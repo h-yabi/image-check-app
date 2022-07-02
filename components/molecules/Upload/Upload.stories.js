@@ -9,4 +9,3 @@ export const Default = () => ({
   components: { Upload },
   template: '<Upload />',
 })
-Default.storyName = 'デフォルト'

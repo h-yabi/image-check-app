@@ -6,7 +6,7 @@ import TextBase from '@/components/atoms/texts/TextBase/TextBase.vue';
 <template>
   <div class="upload">
     <IconPlus />
-    <TextBase :size="14">textが入る</TextBase>
+    <TextBase :size="14">画像ファイルをアップロード</TextBase>
   </div>
 </template>
 
@@ -14,6 +14,14 @@ import TextBase from '@/components/atoms/texts/TextBase/TextBase.vue';
 // .upload
 .upload {
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 400px;
+  height: 300px;
+  margin: auto;
+  background: rgb(253, 251, 251);
+  border: 2px dashed rgb(200, 200, 200);
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
