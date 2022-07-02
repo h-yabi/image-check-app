@@ -11,7 +11,17 @@ useHead({
 
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1 class="title">{{ title }}</h1>
     <Upload />
+    <input type="file" title @change="onChange" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.title {
+  margin: 50px 0 30px;
+  color: #7f7f7f;
+  font-size: 20px;
+  text-align: center;
+}
+</style>
