@@ -23,7 +23,6 @@ import FormInputFile from '@/components/atoms/forms/FormInputFile/FormInputFile.
   height: 300px;
   margin: auto;
   background: rgb(253, 251, 251);
-  border-radius: 5px;
   cursor: pointer;
 }
 </style>

@@ -2,6 +2,7 @@
 import { defineProps, ref } from 'vue';
 const image = ref<HTMLImageElement>();
 const isEnter = ref<boolean>(false);
+const files = ref();
 
 const props = defineProps({
   reset: {
@@ -31,9 +32,17 @@ const onChange = (event: Event) => {
   reader.readAsDataURL(files[0]);
 };
 
-const dragEnter = (event: Event) => {
-  console.log('Enter Drop Area');
+const dragOver = () => {};
+const dragEnter = () => {
   isEnter.value = true;
+};
+const dragLeave = () => {
+  isEnter.value = false;
+};
+const dropFile = (event: DragEvent) => {
+  const dataTransfer = event.dataTransfer as DataTransfer;
+  files.value = [...dataTransfer.files];
+  isEnter.value = false;
 };
 </script>
 
@@ -41,9 +50,12 @@ const dragEnter = (event: Event) => {
   <input
     type="file"
     class="formInputFile"
-    :class="[{ 'is-reset': props.reset }, { enter: isEnter }]"
+    :class="[{ 'is-reset': props.reset }, { 'is-enter': isEnter }]"
+    @dragover="dragOver"
     @change="onChange"
     @dragenter="dragEnter"
+    @dragleave="dragLeave"
+    @drop.prevent="dropFile"
   />
 </template>
 
@@ -52,7 +64,8 @@ const dragEnter = (event: Event) => {
   position: relative;
   padding: 10px;
   box-sizing: border-box;
-  border: 2px dashed rgb(200, 200, 200);
+  border: 3px dashed rgb(200, 200, 200);
+  border-radius: 5px;
   &::before {
     display: block;
     position: absolute;
@@ -64,19 +77,19 @@ const dragEnter = (event: Event) => {
     height: 100px;
     content: '';
   }
-}
-.is-reset {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  color: transparent;
-  font-size: 10px;
-  cursor: pointer;
-}
+  &.is-reset {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: transparent;
+    font-size: 10px;
+    cursor: pointer;
+  }
 
-.enter {
-  border: 2px dotted powderblue;
+  &.is-enter {
+    border: 3px dashed powderblue;
+  }
 }
 </style>
