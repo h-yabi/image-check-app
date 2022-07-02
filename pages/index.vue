@@ -13,7 +13,6 @@ useHead({
   <div>
     <h1 class="title">{{ title }}</h1>
     <Upload />
-    <input type="file" title @change="onChange" />
   </div>
 </template>
 
