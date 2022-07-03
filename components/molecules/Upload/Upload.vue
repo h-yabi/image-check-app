@@ -2,10 +2,17 @@
 import IconPlus from '@/components/atoms/icons/IconPlus/IconPlus.vue';
 import TextBase from '@/components/atoms/texts/TextBase/TextBase.vue';
 import FormInputFile from '@/components/atoms/forms/FormInputFile/FormInputFile.vue';
-const result = ref();
+
+interface Result {
+  name: String;
+  width: Number;
+  height: Number;
+}
+
+const result = ref<Result[]>([]);
 
 const dropFile = (data: File[]) => {
-  const newData = data.map((file) => {
+  data.map((file) => {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = () => {
@@ -19,7 +26,6 @@ const dropFile = (data: File[]) => {
     };
     return result;
   });
-  result.value = newData;
 };
 </script>
 
@@ -30,12 +36,21 @@ const dropFile = (data: File[]) => {
       <TextBase :size="14">画像ファイルをアップロード</TextBase>
       <FormInputFile :reset="true" @drop-files="dropFile" />
     </div>
-    <table class="upload_result">
-      <tr v-for="(file, index) in result" :key="index">
-        <td>{{ file.name }}</td>
-        <td>{{ file.width }}</td>
-        <td>{{ file.height }}</td>
-      </tr>
+    <table v-if="Object.keys(result).length" class="upload_result">
+      <thead>
+        <tr>
+          <th>ファイル名</th>
+          <th>width</th>
+          <th>height</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(file, index) in result" :key="index">
+          <td>{{ file.name }}</td>
+          <td>{{ file.width }}</td>
+          <td>{{ file.height }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
@@ -55,10 +70,17 @@ const dropFile = (data: File[]) => {
     cursor: pointer;
   }
   &_result {
+    width: 100%;
+    max-width: 650px;
+    margin: 50px auto 0;
+    border-collapse: collapse;
+    thead {
+      background: rgb(253, 251, 251);
+    }
     th,
     td {
-      padding: 5px;
-      border: 1px solid #ccc;
+      padding: 10px;
+      border: 1px solid rgb(200, 200, 200);
     }
   }
 }
