@@ -11,6 +11,20 @@ interface Result {
 
 const result = ref<Result[]>([]);
 
+const onChange = (data: File) => {
+  const img = new Image();
+  img.src = URL.createObjectURL(data);
+  img.onload = () => {
+    const imgAttr = {
+      name: data.name,
+      width: img.naturalWidth,
+      height: img.naturalHeight,
+    };
+    URL.revokeObjectURL(img.src);
+    result.value.push(imgAttr);
+  };
+};
+
 const dropFile = (data: File[]) => {
   data.map((file) => {
     const img = new Image();
@@ -33,8 +47,14 @@ const dropFile = (data: File[]) => {
   <div class="upload">
     <div class="upload_box">
       <IconPlus />
-      <TextBase :size="14">画像ファイルをアップロード</TextBase>
-      <FormInputFile :reset="true" @drop-files="dropFile" />
+      <TextBase :size="14">
+        画像をドラッグ＆ドロップ、<br />またはクリックでファイルを選択
+      </TextBase>
+      <FormInputFile
+        :reset="true"
+        @onchange="onChange"
+        @drop-files="dropFile"
+      />
     </div>
     <table v-if="Object.keys(result).length" class="upload_result">
       <thead>
@@ -72,7 +92,7 @@ const dropFile = (data: File[]) => {
   &_result {
     width: 100%;
     max-width: 650px;
-    margin: 50px auto 0;
+    margin: 40px auto 0;
     border-collapse: collapse;
     thead {
       background: rgb(253, 251, 251);
@@ -83,5 +103,8 @@ const dropFile = (data: File[]) => {
       border: 1px solid rgb(200, 200, 200);
     }
   }
+}
+.textBase {
+  color: #6f6d6d;
 }
 </style>

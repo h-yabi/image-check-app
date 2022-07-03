@@ -18,7 +18,7 @@ const customStyle = computed(() => {
 </script>
 
 <template>
-  <p :size="size" :style="customStyle">
+  <p class="textBase" :size="size" :style="customStyle">
     <slot></slot>
   </p>
 </template>

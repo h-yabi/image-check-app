@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref } from 'vue';
-const image = ref<HTMLImageElement>();
 const isEnter = ref<boolean>(false);
-const files = ref();
 
 const props = defineProps({
   reset: {
@@ -10,28 +8,23 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(['drop-files']);
+const emit = defineEmits(['onchange', 'drop-files']);
 
+/*
+ * onChange イベントハンドラ
+ */
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const files = target.files;
-  // console.log(files);
-  if (!files[0]) {
+  if (files === null || !files[0]) {
     return;
   }
-  const image = new Image();
-  const reader = new FileReader();
-  reader.onloadend = function () {
-    image.src = reader.result;
-    image.onload = function () {
-      console.log(image.name);
-      const result = { width: image.naturalWidth, height: image.naturalHeight };
-      console.log(result);
-    };
-  };
-  reader.readAsDataURL(files[0]);
+  emit('onchange', files[0]);
 };
 
+/*
+ * ドラッグ＆ドロップ イベントハンドラ
+ */
 const dragEnter = () => {
   isEnter.value = true;
 };
@@ -40,10 +33,8 @@ const dragLeave = () => {
 };
 const dropFile = (event: DragEvent) => {
   const dataTransfer = event.dataTransfer as DataTransfer;
-  console.log([...dataTransfer.files]);
-  files.value = [...dataTransfer.files];
   isEnter.value = false;
-  emit('drop-files', files.value);
+  emit('drop-files', [...dataTransfer.files]);
 };
 </script>
 

@@ -19,7 +19,7 @@ useHead({
 <style lang="scss" scoped>
 .title {
   margin: 50px 0 30px;
-  color: #7f7f7f;
+  color: #6f6d6d;
   font-size: 20px;
   text-align: center;
 }
