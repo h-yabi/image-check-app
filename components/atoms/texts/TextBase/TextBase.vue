@@ -13,8 +13,6 @@ const customStyle = computed(() => {
     fontSize: props.size + 'px',
   };
 });
-
-// defineProps<Props>();
 </script>
 
 <template>

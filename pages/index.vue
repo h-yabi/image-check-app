@@ -4,7 +4,12 @@ import Upload from '@/components/molecules/Upload/Upload.vue';
 const title = '画像サイズチェッカー';
 
 useHead({
-  meta: [{ name: 'description', content: `This is ${title}` }],
+  meta: [
+    {
+      name: 'description',
+      content: `アップロードした画像の名前、サイズ（width, height）を取得し表示するアプリです。複数画像のアップロードにも対応。`,
+    },
+  ],
   title,
 });
 </script>
