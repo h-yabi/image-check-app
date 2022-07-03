@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue';
 const image = ref<HTMLImageElement>();
 const isEnter = ref<boolean>(false);
 const files = ref();
@@ -10,6 +10,7 @@ const props = defineProps({
     default: false,
   },
 });
+const emit = defineEmits(['drop-files']);
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -31,7 +32,6 @@ const onChange = (event: Event) => {
   reader.readAsDataURL(files[0]);
 };
 
-const dragOver = () => {};
 const dragEnter = () => {
   isEnter.value = true;
 };
@@ -40,9 +40,10 @@ const dragLeave = () => {
 };
 const dropFile = (event: DragEvent) => {
   const dataTransfer = event.dataTransfer as DataTransfer;
+  console.log([...dataTransfer.files]);
   files.value = [...dataTransfer.files];
   isEnter.value = false;
-  console.log(files.value);
+  emit('drop-files', files.value);
 };
 </script>
 
