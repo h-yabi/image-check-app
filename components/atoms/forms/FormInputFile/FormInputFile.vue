@@ -22,7 +22,6 @@ const onChange = (event: Event) => {
   const reader = new FileReader();
   reader.onloadend = function () {
     image.src = reader.result;
-    console.log(files[0].name);
     image.onload = function () {
       console.log(image.name);
       const result = { width: image.naturalWidth, height: image.naturalHeight };
@@ -43,6 +42,7 @@ const dropFile = (event: DragEvent) => {
   const dataTransfer = event.dataTransfer as DataTransfer;
   files.value = [...dataTransfer.files];
   isEnter.value = false;
+  console.log(files.value);
 };
 </script>
 
@@ -51,7 +51,7 @@ const dropFile = (event: DragEvent) => {
     type="file"
     class="formInputFile"
     :class="[{ 'is-reset': props.reset }, { 'is-enter': isEnter }]"
-    @dragover="dragOver"
+    @dragover.prevent
     @change="onChange"
     @dragenter="dragEnter"
     @dragleave="dragLeave"
