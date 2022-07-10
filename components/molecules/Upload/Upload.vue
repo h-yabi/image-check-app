@@ -37,10 +37,17 @@ const dropFile = (data: File[]) => {
       };
       URL.revokeObjectURL(img.src);
       result.value.push(imgAttr);
+      console.log(result);
     };
     return result;
   });
 };
+
+const sortData = computed(() => {
+  return result.value.slice().sort((a, b) => {
+    return a.name < b.name ? -1 : 1;
+  });
+});
 </script>
 
 <template>
@@ -65,7 +72,7 @@ const dropFile = (data: File[]) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(file, index) in result" :key="index">
+        <tr v-for="(file, index) in sortData" :key="index">
           <td>{{ file.name }}</td>
           <td>{{ file.width }}</td>
           <td>{{ file.height }}</td>
